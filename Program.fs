@@ -49,8 +49,8 @@ let rectangle n =
 [<EntryPoint>]
 let main _ =
   let centerTransform =
-    Transform.createTranslate (Length.ofFloat (float marginX / 2.))
-    |> Transform.withY (Length.ofFloat (float marginY / 2.))
+    Transform.createTranslate (Length.ofInt marginX)
+    |> Transform.withY (Length.ofInt (marginY / 2))
 
   let drawing =
     {0 .. nRects - 1}
