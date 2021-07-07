@@ -3,11 +3,11 @@ open System.Text
 
 open SharpVG
 
-let rectSize = 35
+let rectSize = 32
 let nRectsX = 12
 let nRectsY = 24
 let nRects = nRectsX * nRectsY
-let margin = 5
+let margin = 1
 let canvasArea =
     { Width = Length.ofInt (rectSize * 12 + 2 * margin)
       Height = Length.ofInt (rectSize * 24 + 2 * margin)
@@ -19,13 +19,6 @@ let rectangle n =
     let area = Area.ofInts (rectSize, rectSize)
     Rect.create position area
     |> Element.createWithStyle style
-
-// let canvasFrame =
-//     let style = Style.create (Color.ofName White) (Color.ofName Black) (Length.ofInt 1) 1.0 0.0
-//     let position = Point.ofInts (rectSize * (n % nRectsX) + margin, rectSize * (n / nRectsX) + margin)
-//     let area = Area.ofInts (rectSize, rectSize)
-//     Rect.create position area
-//     |> Element.createWithStyle style
 
 [<EntryPoint>]
 let main _ =

@@ -2,8 +2,25 @@
 <html>
 <head>
 <title>Drawing</title>
+<style>
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .canvas {
+    padding: 1em;
+    /* https://getcssscan.com/css-box-shadow-examples */
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; */
+  }
+</style>
 </head>
 <body>
-<img src="out.svg">
+  <div class="box">
+    <div class="canvas">
+      <img src="out.svg" style="display: block">
+    </div>
+  </div>
 </body>
 </html>
