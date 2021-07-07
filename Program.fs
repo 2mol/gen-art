@@ -5,27 +5,44 @@ open SharpVG
 
 let rectSize = 32
 let nRectsX = 12
-let nRectsY = 24
+let nRectsY = 22
 let nRects = nRectsX * nRectsY
 let margin = 1
 let canvasArea =
-  { Width = Length.ofInt (rectSize * 12 + 2 * margin + 30)
-    Height = Length.ofInt (rectSize * 24 + 2 * margin + 30)
+  { Width = Length.ofInt (rectSize * nRectsX + 2 * margin + 30)
+    Height = Length.ofInt (rectSize * nRectsY + 2 * margin + 30)
   }
 
-let random = new System.Random(1)
+let random = new System.Random(0)
 
 let rectangle n =
-  let offSetX = float (random.Next(0,n)) / 12.
-  let offSetY = float (random.Next(0,n)) / 12.
+  let offSetX = float (random.Next(0,n)) / 10.
+  let offSetY = float (random.Next(0,n)) / 10.
+
   let style = Style.create (Color.ofName White) (Color.ofName Black) (Length.ofInt 1) 1.0 0.0
-  let pureX = rectSize * (n % nRectsX) + margin
-  let pureY = rectSize * (n / nRectsX) + margin
-  let position = Point.ofFloats (float pureX + offSetX, float pureY + offSetY)
   let area = Area.ofInts (rectSize, rectSize)
+
+  let xPosition =
+    rectSize * (n % nRectsX) + margin
+    |> float
+    |> (+) offSetX
+
+  let yPosition =
+    rectSize * (n / nRectsX) + margin
+    |> float
+    |> (+) offSetY
+
+  let position = Point.ofFloats (xPosition, yPosition)
+
+  let rotationAngle = float n * (random.NextDouble() - 0.5) / 2.5
+  let rotation =
+    Transform.createRotate rotationAngle
+      (Length.ofFloat (xPosition + 16.))
+      (Length.ofFloat (yPosition + 16.))
 
   Rect.create position area
   |> Element.createWithStyle style
+  |> Element.withTransform rotation
 
 
 [<EntryPoint>]
