@@ -7,10 +7,11 @@ let rectSize = 32
 let nRectsX = 12
 let nRectsY = 22
 let nRects = nRectsX * nRectsY
-let margin = 1
+let marginX = 16
+let marginY = 28
 let canvasArea =
-  { Width = Length.ofInt (rectSize * nRectsX + 2 * margin + 30)
-    Height = Length.ofInt (rectSize * nRectsY + 2 * margin + 30)
+  { Width = Length.ofInt (rectSize * nRectsX + 2 * marginX)
+    Height = Length.ofInt (rectSize * nRectsY + 2 * marginY)
   }
 
 let random = new System.Random(0)
@@ -23,12 +24,12 @@ let rectangle n =
   let area = Area.ofInts (rectSize, rectSize)
 
   let xPosition =
-    rectSize * (n % nRectsX) + margin
+    rectSize * (n % nRectsX)
     |> float
     |> (+) offSetX
 
   let yPosition =
-    rectSize * (n / nRectsX) + margin
+    rectSize * (n / nRectsX)
     |> float
     |> (+) offSetY
 
@@ -47,11 +48,15 @@ let rectangle n =
 
 [<EntryPoint>]
 let main _ =
+  let centerTransform =
+    Transform.createTranslate (Length.ofFloat (float marginX / 2.))
+    |> Transform.withY (Length.ofFloat (float marginY / 2.))
+
   let drawing =
     {0 .. nRects - 1}
     |> Seq.map rectangle
     |> Group.ofSeq
-    // |> Group.addElements
+    |> Group.withTransform centerTransform
     |> Svg.ofGroup
     |> Svg.withSize canvasArea
 
