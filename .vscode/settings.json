@@ -1,3 +1,6 @@
 {
-    "FSharp.linter": false
+    "FSharp.linter": false,
+    "[fsharp]": {
+        "editor.tabSize": 2,
+    },
 }
