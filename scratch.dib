@@ -1,0 +1,3 @@
+#!fsharp
+
+open FSharp.Data
