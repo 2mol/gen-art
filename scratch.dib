@@ -1,3 +1,24 @@
 #!fsharp
 
+#r "nuget:SharpVG"
+#r "nuget: FSharp.Data, 4.1.1"
+
+open System.IO
+open System.Text
+
 open FSharp.Data
+open SharpVG
+
+#!fsharp
+
+let bla = CsvFile.Load(__SOURCE_DIRECTORY__ + "/data/pulsar.csv").Cache()
+
+#!fsharp
+
+for row in bla.Rows do
+    let blo = Seq.map float row.Columns
+    printfn "%A" blo
+
+#!fsharp
+
+// File.WriteAllText("out.svg", drawing.ToString(), Encoding.UTF8)
